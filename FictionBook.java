@@ -1,3 +1,4 @@
+// Kelas untuk Buku Fiksi yang di inherit dari kelas Book
 public class FictionBook extends Book {
     private String genre;
 

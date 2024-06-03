@@ -1,3 +1,4 @@
+// Kelas abstract untuk Buku
 public abstract class Book {
     protected String title;
     protected String author;
@@ -6,7 +7,7 @@ public abstract class Book {
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
-        this.isAvailable = true;
+        this.isAvailable = true; // Default buku tersedia
     }
 
     public String getTitle() {
@@ -25,5 +26,6 @@ public abstract class Book {
         isAvailable = available;
     }
 
+    // Method abstract untuk mendapatkan detail buku
     public abstract String getDetails();
 }

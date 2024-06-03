@@ -1,3 +1,4 @@
+// Kelas untuk Buku Non-Fiksi yang di inherit dari kelas Book
 public class NonFictionBook extends Book {
     private String subject;
 
