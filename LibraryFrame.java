@@ -1,9 +1,8 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-// Kelas untuk antarmuka grafis
 public class LibraryFrame extends JFrame {
     private Library library;
     private JTextArea displayArea;
@@ -11,25 +10,31 @@ public class LibraryFrame extends JFrame {
     public LibraryFrame() {
         library = new Library();
         setTitle("Library Management System");
-        setSize(600, 400);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        // Menambahkan ikon ke jendela
+        setIconImage(new ImageIcon("library_icon.png").getImage());
 
         // Area teks untuk menampilkan informasi buku
         displayArea = new JTextArea();
         displayArea.setEditable(false);
+        displayArea.setFont(new Font("Serif", Font.PLAIN, 16));
+        displayArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(new JScrollPane(displayArea), BorderLayout.CENTER);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(2, 1));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Panel untuk menambah buku
         JPanel addBookPanel = new JPanel();
         addBookPanel.setLayout(new FlowLayout());
 
-        JTextField titleField = new JTextField(10);
-        JTextField authorField = new JTextField(10);
-        JTextField genreOrSubjectField = new JTextField(10);
+        JTextField titleField = new JTextField(15);
+        JTextField authorField = new JTextField(15);
+        JTextField genreOrSubjectField = new JTextField(15);
         JComboBox<String> typeComboBox = new JComboBox<>(new String[]{"Fiction", "Non-Fiction"});
         JButton addButton = new JButton("Add Book");
 
@@ -42,13 +47,14 @@ public class LibraryFrame extends JFrame {
         addBookPanel.add(new JLabel("Type:"));
         addBookPanel.add(typeComboBox);
         addBookPanel.add(addButton);
+
         inputPanel.add(addBookPanel);
 
         // Panel untuk mencari buku
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new FlowLayout());
 
-        JTextField searchField = new JTextField(10);
+        JTextField searchField = new JTextField(15);
         JButton searchButton = new JButton("Search Book");
 
         searchPanel.add(new JLabel("Search by Title:"));
@@ -120,7 +126,29 @@ public class LibraryFrame extends JFrame {
             }
         });
 
+        // Menambahkan panel bawah untuk status bar
+        JPanel statusPanel = new JPanel();
+        statusPanel.setLayout(new BorderLayout());
+        statusPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel statusLabel = new JLabel("Library Management System");
+        statusLabel.setFont(new Font("Serif", Font.BOLD, 14));
+        statusPanel.add(statusLabel, BorderLayout.WEST);
+
+        add(statusPanel, BorderLayout.SOUTH);
+
         // Menampilkan jendela
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        // Pastikan ini dijalankan di event dispatch thread untuk Swing
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Membuat dan menampilkan jendela utama aplikasi
+                new LibraryFrame();
+            }
+        });
     }
 }
